@@ -19,7 +19,7 @@ module.exports.run = async({api,event,args,client,Users,Threads,__GLOBAL,Currenc
 const axios = global.nodemodule["axios"];
 const request = global.nodemodule["request"];
 const fs = global.nodemodule["fs-extra"];
-   var hi = ["•┄┅════❁🌺❁════┅┄•\n\nআসসালামু আলাইকুম-!!🖤💫প্রিয় ভাই ও বন - তুমাদের জন্য নিয়ে আসলাম আমি ইসলামিক ভিডিও \n\n•┄┅════❁🌺❁════┅┄•"];
+   var hi = ["•┄┅════❁🌺❁════┅┄•\n\nআসসালামু আলাইকুম-!!🖤💫প্রিয় ভাই ও বোন - তোমাদের জন্য নিয়ে আসলাম আমি ইসলামিক ভিডিও \n\n•┄┅════❁🌺❁════┅┄•"];
   var know = hi[Math.floor(Math.random() * hi.length)];
   var link = [
 "https://drive.google.com/uc?id=1Y5O3qRzxt-MFR4vVhz0QsMwHQmr-34iH",
@@ -31,7 +31,7 @@ const fs = global.nodemodule["fs-extra"];
 "https://drive.google.com/uc?id=1YSQCTVhrHTNl6B9xSBCQ7frBJ3bp_KoA",
 "https://drive.google.com/uc?id=1Yc9Rwwdpqha1AWeEb5BXV-goFbag0441",
 "https://drive.google.com/uc?id=1YcwtkC5wRbbHsAFuEQYQuwQsH4-ZiBS8",
-"https://drive.google.com/uc?id=1YhfyPl8oGmsIAIOjWQyzQYkDdZUPSalo",
+"https://drive.goo০gle.com/uc?id=1YhfyPl8oGmsIAIOjWQyzQYkDdZUPSalo",
 
 ];
      var callback = () => api.sendMessage({body:` ${know} `,attachment: fs.createReadStream(__dirname + "/cache/15.mp4")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/15.mp4"));    
