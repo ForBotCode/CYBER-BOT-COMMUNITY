@@ -22,17 +22,16 @@ module.exports.run = async function({ api, event }) {
 ┏━━━━━━━━━━━━━━━━━━━━━┓
 ┃      🌟 𝗢𝗪𝗡𝗘𝗥 𝗜𝗡𝗙𝗢 🌟      
 ┣━━━━━━━━━━━━━━━━━━━━━┫
-┃ 👤 𝐍𝐚𝐦𝐞      : 𝐮 𝐥 𝐥 𝐚 𝐬 𝐡 ッ
-┃ 🚹 𝐆𝐞𝐧𝐝𝐞𝐫    : 𝐌𝐚𝐥𝐞
-┃ ❤️ 𝐑𝐞𝐥𝐚𝐭𝐢𝐨𝐧  : 𝐈𝐧 𝐂𝐨𝐦𝐩𝐥𝐢𝐜𝐚𝐭𝐞𝐝
-┃ 🎂 𝐀𝐠𝐞       : 21
-┃ 🕌 𝐑𝐞𝐥𝐢𝐠𝐢𝐨𝐧  : 𝐈𝐬𝐥𝐚𝐦
-┃ 🏫 𝐄𝐝𝐮𝐜𝐚𝐭𝐢𝐨𝐧 : 𝐝𝐢𝐩𝐥𝐨𝐦𝐚 𝐢𝐧 𝐀𝐠𝐫𝐢𝐜𝐮𝐥𝐭𝐮𝐫𝐞
-┃ 🏡 𝐀𝐝𝐝𝐫𝐞𝐬𝐬  : 𝐍𝐨𝐚𝐤𝐡𝐚𝐥𝐢, 𝐁𝐚𝐧𝐠𝐥𝐚𝐝𝐞𝐬𝐡
+┃ 👤 𝐍𝐚𝐦𝐞     : 𝐌𝐃 𝐒𝐀𝐊𝐈𝐁 𝐇𝐎𝐒𝐒𝐀𝐈𝐍
+┃ 🚹 𝐆𝐞𝐧𝐝𝐞𝐫   : 𝐌𝐀𝐋𝐄 
+┃ ❤️ 𝐑𝐞𝐥𝐚𝐭𝐢𝐨𝐧  : 𝐒𝐈𝐍𝐆𝐋𝐄
+┃ 🎂 𝐀𝐠𝐞      : 𝟏𝟕+
+┃ 🕌 𝐑𝐞𝐥𝐢𝐠𝐢𝐨𝐧  : 𝐈𝐒𝐋𝐀𝐌
+┃ 🏫 𝐄𝐝𝐮𝐜𝐚𝐭𝐢𝐨𝐧 : 𝐇𝐒𝐂 𝐁𝐀𝐓𝐂𝐇 𝟐𝟎𝟐𝟓
+┃ 🏡 𝐀𝐝𝐝𝐫𝐞𝐬𝐬  : 𝐔𝐋𝐋𝐀𝐏𝐀𝐑𝐀, 𝐒𝐈𝐑𝐀𝐉𝐆𝐀𝐍𝐉.
 ┣━━━━━━━━━━━━━━━━━━━━━┫
-┃ 🎭 𝐓𝐢𝐤𝐭𝐨𝐤  : ullash01
-┃ 📢 𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦 : https://t.me/The_morning_star71
-┃ 🌐 𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤 : https://www.facebook.com/profile.php?id=100015168369582
+┃ 🌐 𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤 : ᏕᏗᏦᎥᏰ ᏰᏂᏗᎥ
+┃ 📢 𝐖𝐡𝐚𝐭𝐬𝐚𝐩𝐩 : +𝟖𝟖𝟎𝟏𝟕𝟔𝟓𝟎𝟏𝟐𝟏𝟗 
 ┣━━━━━━━━━━━━━━━━━━━━━┫
 ┃ 🕒 𝐔𝐩𝐝𝐚𝐭𝐞𝐝 𝐓𝐢𝐦𝐞:  ${time}
 ┗━━━━━━━━━━━━━━━━━━━━━┛
@@ -40,7 +39,7 @@ module.exports.run = async function({ api, event }) {
         attachment: fs.createReadStream(__dirname + "/cache/1.png")
     }, event.threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"));
   
-    return request(encodeURI(`https://graph.facebook.com/100000478146113/picture?height=720&width=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`))
+    return request(encodeURI(`https://scontent.fdac20-1.fna.fbcdn.net/v/t39.30808-6/472796285_122118705218674221_5876343853182013289_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=9K-AuPY5yzAQ7kNvwFwVnNt&_nc_oc=AdnADplOA-pcoDsosorbGTf0uAqGJFLmSTfbpNUOXIAnShuOfpXcsJur1MXwgjsDrNU&_nc_zt=23&_nc_ht=scontent.fdac20-1.fna&_nc_gid=pJYGgDolj6J76mD-vsIYpg&oh=00_AfJL8F6ufDKW6YC5CnKuAq9oC_rEb1VaTOLgFeQwZiQKjQ&oe=683F04D8`))
         .pipe(fs.createWriteStream(__dirname + '/cache/1.png'))
         .on('close', () => callback());
 };
