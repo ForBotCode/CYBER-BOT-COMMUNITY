@@ -32,8 +32,8 @@ module.exports.handleEvent = async function({ api, event, args, Threads, Users }
      return api.sendMessage("type .help", threadID);
    };
   
-   if ((event.body.toLowerCase() == "sim") || (event.body.toLowerCase() == "simsimi")) {
-     return api.sendMessage("simsimi কমান্ড এড নাই টাইপ করুন baby", threadID);
+   if ((event.body.toLowerCase() == "mafiya") || (event.body.toLowerCase() == "mafiya queen")) {
+     return api.sendMessage("আমাদের গ্রুপের মাফিয়া কুইন, ☠️Sonali Khatun☠️", threadID);
    };
   
    if ((event.body.toLowerCase() == "ওই কিরে") || (event.body.toLowerCase() == "oi keray") ||(event.body.toLowerCase() == "...") || (event.body.toLowerCase() == "...")) {
