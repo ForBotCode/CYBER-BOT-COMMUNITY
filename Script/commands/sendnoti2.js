@@ -1,9 +1,9 @@
 module.exports.config = {
 	name: "sendnoti2",
-	version: "1.0.2",
+	version: "1.0.3",
 	hasPermssion: 2,
-	credits: "𝐂𝐘𝐁𝐄𝐑 ☢️_𖣘 -𝐁𝐎𝐓 ⚠️ 𝑻𝑬𝑨𝑴_ ☢️",
-	description: "Send messages to groups (reply to photos/videos to be attached)!\nBetter version of sendnotiUwU",
+	credits: "Modified by ChatGPT",
+	description: "Send messages to all groups (with optional media if replying)",
 	commandCategory: "system",
 	usages: "[Text]",
 	cooldowns: 5
@@ -18,58 +18,72 @@ module.exports.languages = {
 		"sendSuccess": "Sent message to %1 thread!",
 		"sendFail": "[!] Can't send message to %1 thread"
 	}
-}
+};
 
 module.exports.run = async ({ api, event, args, getText }) => {
-if (event.type == "message_reply") {
-const request = global.nodemodule["request"];
-const fs = require('fs')
-const axios = require('axios')
+	const fs = require("fs-extra");
+	const axios = require("axios");
 
+	const allThread = global.data.allThreadID || [];
+	let count = 0, cantSend = [];
 
+	const messageBody = "»Announcement from the Admin Sakib!«\n\n" + args.join(" ");
 
-       
-        var path = __dirname + `/cache/snoti.png`;
-        var path = __dirname + `/cache/snoti.mp3`;
-        var path = __dirname + `/cache/snoti.jpeg`;
-        var path = __dirname + `/cache/snoti.jpg`;
+	// ✅ If replying to a message with media
+	if (event.type === "message_reply" && event.messageReply.attachments.length > 0) {
+		const attachment = event.messageReply.attachments[0];
+		const url = attachment.url;
 
+		// Determine file extension based on type
+		let ext = "dat";
+		if (attachment.type === "photo") ext = "jpg";
+		else if (attachment.type === "audio") ext = "mp3";
+		else if (attachment.type === "video") ext = "mp4";
 
-var abc = event.messageReply.attachments[0].url;
-    let getdata = (await axios.get(`${abc}`, { responseType: 'arraybuffer' })).data;
+		const filePath = __dirname + `/cache/sendnoti_temp.${ext}`;
+		try {
+			const response = await axios.get(url, { responseType: "arraybuffer" });
+			fs.writeFileSync(filePath, Buffer.from(response.data, "utf-8"));
 
-  fs.writeFileSync(path, Buffer.from(getdata, 'utf-8'));
+			for (const idThread of allThread) {
+				if (isNaN(parseInt(idThread)) || idThread == event.threadID) continue;
 
+				api.sendMessage({
+					body: messageBody,
+					attachment: fs.createReadStream(filePath)
+				}, idThread, (err) => {
+					if (err) cantSend.push(idThread);
+				});
+				count++;
+				await new Promise(resolve => setTimeout(resolve, 500));
+			}
 
-	var allThread = global.data.allThreadID || [];
-	var count = 1,
-		cantSend = [];
-	for (const idThread of allThread) {
-		if (isNaN(parseInt(idThread)) || idThread == event.threadID) ""
-		else {
-			api.sendMessage({body:" »✦\ud835\uddd4\ud835\udde1\ud835\udde1\ud835\udde2\ud835\udde8\ud835\uddd6\ud835\uddd8\ud835\udde0\ud835\uddd8\ud835\udde1\ud835\udde7\x20\ud835\uddd9\ud835\udde5\ud835\udde2\ud835\udde0\x20\ud835\udde2\ud835\uddea\ud835\udde1\ud835\uddd8\ud835\udde5\x20\ud835\udc0f\ud835\udc11\ud835\udc08\ud835\udc18\ud835\udc00\ud835\udc0d\ud835\udc12\ud835\udc07✦«\n\n" + args.join(` `),attachment: fs.createReadStream(path) }, idThread, (error, info) => {
-				if (error) cantSend.push(idThread);
+			fs.unlinkSync(filePath); // Clean up temp file
+		} catch (error) {
+			console.error("Error downloading or sending file:", error);
+			return api.sendMessage("❌ ফাইল প্রক্রিয়াজাত করতে সমস্যা হয়েছে।", event.threadID, event.messageID);
+		}
+	} else {
+		// ✅ Text-only message
+		for (const idThread of allThread) {
+			if (isNaN(parseInt(idThread)) || idThread == event.threadID) continue;
+
+			api.sendMessage(messageBody, idThread, (err) => {
+				if (err) cantSend.push(idThread);
 			});
 			count++;
 			await new Promise(resolve => setTimeout(resolve, 500));
 		}
 	}
-	return api.sendMessage(getText("sendSuccess", count), event.threadID, () => (cantSend.length > 0 ) ? api.sendMessage(getText("sendFail", cantSend.length), event.threadID, event.messageID) : "", event.messageID);
 
-}
-else {
-	var allThread = global.data.allThreadID || [];
-	var count = 1,
-		cantSend = [];
-	for (const idThread of allThread) {
-		if (isNaN(parseInt(idThread)) || idThread == event.threadID) ""
-		else {
-			api.sendMessage("»\x41\x6e\x6e\x6f\x75\x6e\x63\x65\x6d\x65\x6e\x74\x20\x66\x72\x6f\x6d\x20\x74\x68\x65\x20\x41\x64\x6d\x69\x6e\x20\x50\x72\x69\x79\x61\x6e\x73\x68\x21«\n\n" + args.join(` `), idThread, (error, info) => {
-				if (error) cantSend.push(idThread);
-			});
-			count++;
-			await new Promise(resolve => setTimeout(resolve, 500));
-		}
-	}
-	return api.sendMessage(getText("sendSuccess", count), event.threadID, () => (cantSend.length > 0 ) ? api.sendMessage(getText("sendFail", cantSend.length), event.threadID, event.messageID) : "", event.messageID); }
-  }
+	// ✅ Report back to sender
+	return api.sendMessage(
+		getText("sendSuccess", count),
+		event.threadID,
+		() => {
+			if (cantSend.length > 0)
+				api.sendMessage(getText("sendFail", cantSend.length), event.threadID, event.messageID);
+		},
+		event.messageID
+	);
+};
