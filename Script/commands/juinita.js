@@ -1,34 +1,23 @@
-const readline = require('readline');
+module.exports.config = {
+  name: "juinita",
+  version: "1.0.0",
+  hasPermssion: 0,
+  credits: "YourName",
+  description: "Replies to 'Juinita ke?' without a command prefix",
+  commandCategory: "no prefix",
+  usages: "",
+  cooldowns: 2
+};
 
-// ইন্টারফেস তৈরি ইনপুট ও আউটপুটের জন্য
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+module.exports.handleEvent = function({ event, api }) {
+  const { body, threadID, messageID } = event;
+  if (!body) return;
 
-// বটের রিপ্লাই ফাংশন
-function chatbot(message) {
-  const normalized = message.toLowerCase().trim();
+  const msg = body.toLowerCase();
 
-  if (normalized === 'juinita ke?') {
-    return 'সাকিবের সিনিয়র বউ👀🌸';
-  } else {
-    return 'আমি বুঝলাম না। আবার বলো।';
+  if (msg.includes("juinita ke") || msg.includes("juinita কে")) {
+    return api.sendMessage("Sakib er senior bou👀🌸", threadID, messageID);
   }
-}
+};
 
-// বারবার ইনপুট নেয়ার জন্য রিকার্সিভ ফাংশন
-function ask() {
-  rl.question('তুমি: ', (userInput) => {
-    if (userInput.toLowerCase() === 'exit') {
-      console.log('বট: ভালো থেকো!');
-      rl.close();
-    } else {
-      const response = chatbot(userInput);
-      console.log('বট:', response);
-      ask(); // আবার প্রশ্ন করা হবে
-    }
-  });
-}
-
-ask(); // শুরু করা হচ্ছে
+module.exports.run = () => {};
