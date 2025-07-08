@@ -10,7 +10,7 @@ module.exports.config = {
 };
 
 module.exports.handleEvent = async function ({ event, api }) {
-  const triggerWords = ["tuli", "তুলি", "রাজিয়া", "razia", "raziya", "rajiya", "rajia"];
+  const triggerWords = ["tuli", "তুলি", "রাজিয়া", "razia", "tasfiya", "rajiya", "rajia"];
   const message = event.body?.toLowerCase();
 
   if (!message) return;
